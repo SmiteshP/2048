@@ -21,7 +21,7 @@ void state_queue<T, size>::push(T elem) {
 }
 
 template <typename T, int size>
-bool state_queue<T, size>::can_redo() {
+bool state_queue<T, size>::can_redo() const {
 	return !redo_space.empty();
 }
 
@@ -34,7 +34,7 @@ void state_queue<T, size>::redo() {
 }
 
 template <typename T, int size>
-bool state_queue<T, size>::can_undo() {
+bool state_queue<T, size>::can_undo() const {
 	return !undo_space.empty();
 }
 
@@ -47,6 +47,6 @@ void state_queue<T, size>::undo() {
 }
 
 template <typename T, int size>
-T state_queue<T, size>::get_state() {
+T state_queue<T, size>::get_state() const {
 	return curr_state;
 }

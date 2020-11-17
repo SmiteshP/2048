@@ -14,15 +14,15 @@ public:
 	void push(T elem);
 
 	// Check if redo is possible and redo
-	bool can_redo();
+	bool can_redo() const;
 	void redo();
 
 	// Check if undo is possible and undo
-	bool can_undo();
+	bool can_undo() const;
 	void undo();
 
 	// Retreive value of curr_state
-	T get_state();
+	T get_state() const;
 
 private:
 	T curr_state;
