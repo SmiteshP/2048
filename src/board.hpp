@@ -4,21 +4,21 @@
 
 class board {
 public:
-	// return value of repective move without adding random tile
+	// return value of respective move without adding random tile
 	std::array<std::array <int, 4>, 4> look_left();
 	std::array<std::array <int, 4>, 4> look_up();
 	std::array<std::array <int, 4>, 4> look_right();
 	std::array<std::array <int, 4>, 4> look_down();
 
 	// make respective move
-	// return true if succesful else false
+	// return true if successful else false
 	bool move_left();
 	bool move_up();
 	bool move_right();
 	bool move_down();
 
 	// undo and redo
-	// return true if succesful else false
+	// return true if successful else false
 	bool undo();
 	bool redo();
 
@@ -45,7 +45,7 @@ private:
 	void collapse(std::array<int *, 4> arr);
 
 	// Randomly add tile
-	// return true if tile added succesfully
+	// return true if tile added successfully
 	// return false if tile cannot be added
 	bool add_random_tile(std::array <std::array <int, 4>, 4>& grid);
 
