@@ -5,10 +5,10 @@
 class board {
 public:
 	// return value of respective move without adding random tile
-	std::array<std::array <int, 4>, 4> look_left();
-	std::array<std::array <int, 4>, 4> look_up();
-	std::array<std::array <int, 4>, 4> look_right();
-	std::array<std::array <int, 4>, 4> look_down();
+	std::array <std::array <int, 4>, 4> look_left();
+	std::array <std::array <int, 4>, 4> look_up();
+	std::array <std::array <int, 4>, 4> look_right();
+	std::array <std::array <int, 4>, 4> look_down();
 
 	// make respective move
 	// return true if successful else false
@@ -21,6 +21,23 @@ public:
 	// return true if successful else false
 	bool undo();
 	bool redo();
+
+	// Return next states of the board
+	// Order : left, up, right, down
+	std::array <std::array <std::array <int, 4>, 4>, 4> get_next_states();
+
+	// Return max tile on current board
+	int get_curr_max_tile();
+
+	// Return maximum tile attainable in one move
+	int get_next_max_tile();
+
+	// Return current board sum
+	int get_curr_sum();
+
+	// check if performing any move will change the board
+	// true if some move is possible, else false and board has reached dead end
+	bool next_move_possible()
 
 private:
 	// stores the current state of board
