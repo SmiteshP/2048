@@ -1,6 +1,9 @@
 #pragma once
 
 #include <array>
+#include "state_queue.hpp"
+#include "state_queue.cpp"
+using namespace std;
 
 class board
 {
@@ -8,6 +11,8 @@ public:
 	//Instantiate with 0s and add a random tile
 	board();
 	~board();
+
+	void print_grid() const;
 
 	// return value of respective move without adding random tile
 	std::array<std::array<int, 4>, 4> look_left();
@@ -42,9 +47,9 @@ private:
 	int curr_sum;
 
 	// store game board history
-	state_queue<std::array<std::array<int, 4>, 4>> grid;
+	state_queue<std::array<std::array<int, 4>, 4>, 5> grid;
 	// store random numbers to compute/recompute board
-	state_queue<std::pair<int, int>> random_numbers;
+	state_queue<std::pair<int, int>, 5> random_numbers;
 
 	// collapse the list of numbers from left to right
 	void collapse(std::array<int *, 4> arr);
@@ -61,5 +66,6 @@ private:
 	// Max tile
 	// Sum
 	// Set of tiles and their count
-	void update_state(const std::array<std::array<int, 4>, 4> &grid);
+	// void update_state(const std::array<std::array<int, 4>, 4> &grid);
+	void update_state();
 };

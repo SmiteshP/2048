@@ -1,4 +1,4 @@
-BUILDDIR= build
+BUILDDIR= src
 SOURCEDIR= src
 SOURCES= $(wildcard $(SOURCEDIR)/*.cpp)
 OBJECTS= $(patsubst $(SOURCEDIR)/%, $(BUILDDIR)/%, $(patsubst %.cpp, %.o, $(SOURCES)))

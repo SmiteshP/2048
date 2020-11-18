@@ -4,9 +4,11 @@
 #include <stack>
 
 template <typename T, int size>
-class state_queue {
+class state_queue
+{
 public:
 	// Instantiate with starting element
+	state_queue();
 	state_queue(T elem);
 	~state_queue();
 
@@ -23,9 +25,11 @@ public:
 
 	// Retreive value of curr_state
 	T get_state() const;
+	int get_size() const;
 
 private:
 	T curr_state;
-	std::deque <T> undo_space;
-	std::stack <T> redo_space;
+	int curr_size;
+	std::deque<T> undo_space;
+	std::deque<T> redo_space;
 };
