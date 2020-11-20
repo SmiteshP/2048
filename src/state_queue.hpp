@@ -27,5 +27,5 @@ class state_queue {
  private:
     T curr_state;
     std::deque<T> undo_space;
-    std::stack<T> redo_space;
+    std::deque<T> redo_space;
 };
