@@ -1,3 +1,4 @@
+#include <cassert>
 #include "state_queue.hpp"
 
 template <typename T, int size>
@@ -27,8 +28,8 @@ template <typename T, int size>
 void state_queue<T, size>::redo() {
     assert(!redo_space.empty());
     undo_space.push_back(curr_state);
-    curr_state = redo_space.top();
-    redo_space.pop();
+    curr_state = redo_space.front();
+    redo_space.pop_front();
 }
 
 template <typename T, int size>
@@ -39,7 +40,7 @@ bool state_queue<T, size>::can_undo() const {
 template <typename T, int size>
 void state_queue<T, size>::undo() {
     assert(!undo_space.empty());
-    redo_space.push(curr_state);
+    redo_space.push_front(curr_state);
     curr_state = undo_space.back();
     undo_space.pop_back();
 }
