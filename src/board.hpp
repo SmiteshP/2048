@@ -2,13 +2,27 @@
 
 #include <array>
 
+// used to store all current state variables of board
+struct board_state {
+    std::array<std::array<int, 4>, 4> curr_board;
+
+    std::array<std::array<int, 4>, 4> next_left;
+    std::array<std::array<int, 4>, 4> next_up;
+    std::array<std::array<int, 4>, 4> next_right;
+    std::array<std::array<int, 4>, 4> next_down;
+
+    int curr_max;
+    int next_max;
+    int curr_sum;
+
+    int score;
+};
+
 class board {
  public:
-    // return value of respective move without adding random tile
-    std::array<std::array<int, 4>, 4> look_left();
-    std::array<std::array<int, 4>, 4> look_up();
-    std::array<std::array<int, 4>, 4> look_right();
-    std::array<std::array<int, 4>, 4> look_down();
+    // Constructor and Destructor
+    board();
+    ~board();
 
     // make respective move
     // return true if successful else false
@@ -21,6 +35,9 @@ class board {
     // return true if successful else false
     bool undo();
     bool redo();
+
+    // get curr_board
+    std::array<std::array<int, 4>, 4> get_curr_board();
 
     // Return next states of the board
     // Order : left, up, right, down
@@ -37,41 +54,38 @@ class board {
 
     // check if performing any move will change the board
     // true if some move is possible, else false and board has reached dead end
-    bool next_move_possible()
+    bool next_move_possible();
 
-        private :
-        // stores the current state of board
-        std::array<std::array<int, 4>, 4> curr_board;
-
-    // stores immediate next board states
-    std::array<std::array<int, 4>, 4> next_left;
-    std::array<std::array<int, 4>, 4> next_up;
-    std::array<std::array<int, 4>, 4> next_right;
-    std::array<std::array<int, 4>, 4> next_down;
-
-    int curr_max;
-    int next_max;
-    int curr_sum;
+ private:
+    // Stores all current state variables
+    board_state curr_state;
 
     // store game board history
-    state_queue<std::array<std::array<int, 4>, 4>> grid;
+    state_queue<board_state> grid_queue;
     // store random numbers to compute/recompute board
     state_queue<std::pair<int, int>> random_numbers;
 
     // collapse the list of numbers from left to right
-    void collapse(std::array<int*, 4> arr);
+    // returns increment in score
+    int collapse(std::array<int*, 4> arr);
+
+    // update value of respective move without adding random tile
+    void look_left();
+    void look_up();
+    void look_right();
+    void look_down();
 
     // Randomly add tile
     // return true if tile added successfully
     // return false if tile cannot be added
-    bool add_random_tile(std::array<std::array<int, 4>, 4>& grid);
+    bool add_random_tile();
 
-    // Calculate max of next states
-    void next_grid_max();
+    // Calculate max of the given grid
+    int grid_max(const std::array<std::array<int, 4>, 4>& arr);
 
     // Calculates the diffent state->Z operations on curr_state
     // Max tile
     // Sum
     // Set of tiles and their count
-    void update_state(const std::array<std::array<int, 4>, 4>& grid);
+    void update_state();
 };
