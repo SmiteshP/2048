@@ -10,10 +10,16 @@ CXXFLAGS = -std=c++17
 all: release
 
 release: CXXFLAGS += -O2
-release: $(BINARY)
+release: build $(BINARY)
 
 debug: CXXFLAGS += -g -Wall -Wshadow -fsanitize=address -fsanitize=undefined
-debug: $(BINARY)
+debug: build $(BINARY)
+
+$(BUILDDIR):
+	mkdir -p $(BUILDDIR)
+
+format:
+	clang-format -i -style=file src/*.cpp src/*.hpp
 
 $(BINARY): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) -o $(BINARY) $^
