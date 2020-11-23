@@ -24,12 +24,26 @@ int main() {
     // std::array<std::array<int, 4>, 4> curr_board;
     board b1;
     print_grid(b1.get_curr_board());
-
-    cout << b1.undo() << endl;
+    cout << "************\n";
+    b1.move_right();
     print_grid(b1.get_curr_board());
-    cout << b1.undo() << endl;
+    cout << "************\n";
+    b1.move_right();
     print_grid(b1.get_curr_board());
-    cout << b1.redo() << endl;
+    cout << "************\n";
+    b1.move_right();
     print_grid(b1.get_curr_board());
+    // cout << "************\n";
+    // b1.move_left();
+    // print_grid(b1.get_curr_board());
+    // cout << "************\n";
+    // b1.move_left();
+    // print_grid(b1.get_curr_board());
+    // cout << b1.undo() << endl;
+    // print_grid(b1.get_curr_board());
+    // cout << b1.undo() << endl;
+    // print_grid(b1.get_curr_board());
+    // cout << b1.redo() << endl;
+    // print_grid(b1.get_curr_board());
     // cout << b1.grid.get_state() << endl;
 }

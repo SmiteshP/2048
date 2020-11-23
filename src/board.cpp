@@ -13,6 +13,10 @@ board::board() {
     add_random_tile();
     add_random_tile();
     score = 0;
+    score_increment_left = 0;
+    score_increment_right = 0;
+    score_increment_up = 0;
+    score_increment_down = 0;
     grid_queue =
         new state_queue<std::array<std::array<int, 4>, 4>, 10>(curr_board);
     score_queue = new state_queue<int, 10>(score);
