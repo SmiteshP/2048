@@ -1,6 +1,10 @@
 #pragma once
 
+#include "state_queue.hpp"
+#include "state_queue.cpp"
+
 #include <array>
+#include <map>
 
 class board {
  public:
@@ -21,24 +25,24 @@ class board {
     bool redo();
 
     // get curr_board
-    std::array<std::array<int, 4>, 4> get_curr_board();
+    std::array<std::array<int, 4>, 4> get_curr_board() const;
 
     // Return next states of the board
     // Order : left, up, right, down
-    std::array<std::array<std::array<int, 4>, 4>, 4> get_next_states();
+    std::array<std::array<std::array<int, 4>, 4>, 4> get_next_states() const;
 
     // Return max tile on current board
-    int get_curr_max_tile();
+    int get_curr_max_tile() const;
 
     // Return maximum tile attainable in one move
-    int get_next_max_tile();
+    int get_next_max_tile() const;
 
     // Return current board sum
-    int get_curr_sum();
+    int get_curr_sum() const;
 
     // check if performing any move will change the board
     // true if some move is possible, else false and board has reached dead end
-    bool next_move_possible();
+    bool next_move_possible() const;
 
  private:
     std::array<std::array<int, 4>, 4> curr_board;
@@ -48,6 +52,13 @@ class board {
     std::array<std::array<int, 4>, 4> next_right;
     std::array<std::array<int, 4>, 4> next_down;
 
+    int score_increment_left;
+    int score_increment_up;
+    int score_increment_right;
+    int score_increment_down;
+
+   //  std::map<int, int> curr_tile_cnt;
+
     int curr_max;
     int next_max;
     int curr_sum;
@@ -55,7 +66,10 @@ class board {
     int score;
 
     // store game board history
-    state_queue<board_state> *grid_queue;
+    state_queue<std::array<std::array<int, 4>, 4>, 10> *grid_queue;
+    
+    // store score infomation at each point
+    state_queue<int, 10> *score_queue;
 
     // collapse the list of numbers from left to right
     // returns increment in score
