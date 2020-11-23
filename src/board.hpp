@@ -1,5 +1,8 @@
 #pragma once
 
+#include "state_queue.hpp"
+#include "state_queue.cpp"
+
 #include <array>
 
 class board {
@@ -55,7 +58,7 @@ class board {
     int score;
 
     // store game board history
-    state_queue<board_state> *grid_queue;
+    state_queue<std::array<std::array<int, 4>, 4>, 5> *grid_queue;
 
     // collapse the list of numbers from left to right
     // returns increment in score
