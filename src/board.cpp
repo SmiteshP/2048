@@ -108,12 +108,6 @@ std::array<std::array<int, 4>, 4> board::get_curr_board() const{
 }
 
 std::array<std::array<std::array<int, 4>, 4>, 4> board::get_next_states() const{
-    // std::array<std::array<std::array<int, 4>, 4>, 4> next_states;
-    // next_states[0] = next_left;
-    // next_states[1] = next_up;
-    // next_states[2] = next_right;
-    // next_states[3] = next_down;
-    // return next_states;
     return {next_left, next_up, next_right, next_down};
 }
 
