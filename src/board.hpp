@@ -42,8 +42,12 @@ class board {
 
     // check if performing any move will change the board
     // true if some move is possible, else false and board has reached dead end
-    bool next_move_possible() const;
-
+    
+    bool next_left_possible() const;
+    bool next_up_possible() const;
+    bool next_right_possible() const;
+    bool next_down_possible() const;
+    
  private:
     std::array<std::array<int, 4>, 4> curr_board;
 
