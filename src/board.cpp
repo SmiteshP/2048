@@ -2,7 +2,7 @@
 #include <random>
 #include <iostream>
 #include <vector>
-// #include <pair>
+
 #include "board.hpp"
 
 using namespace std;
