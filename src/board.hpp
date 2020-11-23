@@ -57,7 +57,7 @@ class board {
     int score_increment_right;
     int score_increment_down;
 
-   //  std::map<int, int> curr_tile_cnt;
+    //  std::map<int, int> curr_tile_cnt;
 
     int curr_max;
     int next_max;
@@ -67,7 +67,7 @@ class board {
 
     // store game board history
     state_queue<std::array<std::array<int, 4>, 4>, 10> *grid_queue;
-    
+
     // store score infomation at each point
     state_queue<int, 10> *score_queue;
 
