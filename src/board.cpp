@@ -137,47 +137,51 @@ int board::collapse(std::array<int*, 4> arr) {
 }
 
 void board::look_left() {
-    collapse({&curr_board[0][0], &curr_board[0][1], &curr_board[0][2],
-              &curr_board[0][3]});
-    collapse({&curr_board[1][0], &curr_board[1][1], &curr_board[1][2],
-              &curr_board[1][3]});
-    collapse({&curr_board[2][0], &curr_board[2][1], &curr_board[2][2],
-              &curr_board[2][3]});
-    collapse({&curr_board[3][0], &curr_board[3][1], &curr_board[3][2],
-              &curr_board[3][3]});
+	next_left = curr_board;
+    collapse({&next_left[0][0], &next_left[0][1], &next_left[0][2],
+              &next_left[0][3]});
+    collapse({&next_left[1][0], &next_left[1][1], &next_left[1][2],
+              &next_left[1][3]});
+    collapse({&next_left[2][0], &next_left[2][1], &next_left[2][2],
+              &next_left[2][3]});
+    collapse({&next_left[3][0], &next_left[3][1], &next_left[3][2],
+              &next_left[3][3]});
 }
 
 void board::look_up() {
-    collapse({&curr_board[3][0], &curr_board[2][0], &curr_board[1][0],
-              &curr_board[0][0]});
-    collapse({&curr_board[3][1], &curr_board[2][1], &curr_board[1][1],
-              &curr_board[0][1]});
-    collapse({&curr_board[3][2], &curr_board[2][2], &curr_board[1][2],
-              &curr_board[0][2]});
-    collapse({&curr_board[3][3], &curr_board[2][3], &curr_board[1][3],
-              &curr_board[0][3]});
+	next_up = curr_board;
+    collapse({&next_up[3][0], &next_up[2][0], &next_up[1][0],
+              &next_up[0][0]});
+    collapse({&next_up[3][1], &next_up[2][1], &next_up[1][1],
+              &next_up[0][1]});
+    collapse({&next_up[3][2], &next_up[2][2], &next_up[1][2],
+              &next_up[0][2]});
+    collapse({&next_up[3][3], &next_up[2][3], &next_up[1][3],
+              &next_up[0][3]});
 }
 
 void board::look_right() {
-    collapse({&curr_board[0][3], &curr_board[0][2], &curr_board[0][1],
-              &curr_board[0][0]});
-    collapse({&curr_board[1][3], &curr_board[1][2], &curr_board[1][1],
-              &curr_board[1][0]});
-    collapse({&curr_board[2][3], &curr_board[2][2], &curr_board[2][1],
-              &curr_board[2][0]});
-    collapse({&curr_board[3][3], &curr_board[3][2], &curr_board[3][1],
-              &curr_board[3][0]});
+	next_right = curr_board;
+    collapse({&next_right[0][3], &next_right[0][2], &next_right[0][1],
+              &next_right[0][0]});
+    collapse({&next_right[1][3], &next_right[1][2], &next_right[1][1],
+              &next_right[1][0]});
+    collapse({&next_right[2][3], &next_right[2][2], &next_right[2][1],
+              &next_right[2][0]});
+    collapse({&next_right[3][3], &next_right[3][2], &next_right[3][1],
+              &next_right[3][0]});
 }
 
 void board::look_down() {
-    collapse({&curr_board[0][0], &curr_board[1][0], &curr_board[2][0],
-              &curr_board[3][0]});
-    collapse({&curr_board[0][1], &curr_board[1][1], &curr_board[2][1],
-              &curr_board[3][1]});
-    collapse({&curr_board[0][2], &curr_board[1][2], &curr_board[2][2],
-              &curr_board[3][2]});
-    collapse({&curr_board[0][3], &curr_board[1][3], &curr_board[2][3],
-              &curr_board[3][3]});
+	next_down = curr_board;
+    collapse({&next_down[0][0], &next_down[1][0], &next_down[2][0],
+              &next_down[3][0]});
+    collapse({&next_down[0][1], &next_down[1][1], &next_down[2][1],
+              &next_down[3][1]});
+    collapse({&next_down[0][2], &next_down[1][2], &next_down[2][2],
+              &next_down[3][2]});
+    collapse({&next_down[0][3], &next_down[1][3], &next_down[2][3],
+              &next_down[3][3]});
 }
 
 bool board::add_random_tile() {
