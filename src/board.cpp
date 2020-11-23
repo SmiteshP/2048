@@ -3,8 +3,7 @@
 #include "board.hpp"
 
 board::board() {
-    std::mt19937 rng(
-        std::chrono::steady_clock::now().time_since_epoch().count());
+    srand(std::chrono::steady_clock::now().time_since_epoch().count());
 
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -185,7 +184,7 @@ void board::look_down() {
 }
 
 bool board::add_random_tile() {
-    int tile_val = rng() % 10 == 0 ? 4 : 2;
+    int tile_val = rand() % 10 == 0 ? 4 : 2;
     int blank_cnt = 0;
 
     for (auto i : curr_board) {
@@ -209,6 +208,8 @@ bool board::add_random_tile() {
             }
         }
     }
+
+	return false;
 }
 
 int board::grid_max(const std::array<std::array<int, 4>, 4>& arr) {
