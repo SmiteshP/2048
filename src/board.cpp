@@ -11,8 +11,8 @@ board::board() {
             curr_board[i][j] = 0;
         }
     }
-    // add_random_tile();
-    // add_random_tile();
+    add_random_tile();
+    add_random_tile();
     score = 0;
     grid_queue =
         new state_queue<std::array<std::array<int, 4>, 4>, 10>(curr_board);
@@ -22,8 +22,8 @@ board::board() {
 }
 
 board::~board() {
-    delete (grid_queue);
-    delete (score_queue);
+    delete grid_queue;
+    delete score_queue;
 }
 
 bool board::move_left() {
@@ -32,7 +32,7 @@ bool board::move_left() {
     }
     curr_board = next_left;
     score += score_increment_left;
-    // add_random_tile();
+    add_random_tile();
     update_state();
     return true;
 }
@@ -43,7 +43,7 @@ bool board::move_up() {
     }
     curr_board = next_up;
     score += score_increment_up;
-    // add_random_tile();
+    add_random_tile();
     update_state();
     return true;
 }
@@ -54,7 +54,7 @@ bool board::move_right() {
     }
     curr_board = next_right;
     score += score_increment_right;
-    // add_random_tile();
+    add_random_tile();
     update_state();
     return true;
 }
@@ -65,7 +65,7 @@ bool board::move_down() {
     }
     curr_board = next_down;
     score += score_increment_down;
-    // add_random_tile();
+    add_random_tile();
     update_state();
     return true;
 }
@@ -114,7 +114,7 @@ bool board::next_move_possible() const {
             (curr_board != next_right) || (curr_board != next_down));
 }
 
-int board::collapse(std::array<int *, 4> arr) {
+int board::collapse(std::array<int*, 4> arr) {
     int score_increment;
 
     for (int i = 3; i > 0; i--) {
@@ -136,7 +136,78 @@ int board::collapse(std::array<int *, 4> arr) {
     return score_increment;
 }
 
-int board::grid_max(const std::array<std::array<int, 4>, 4> &arr) {
+void board::look_left() {
+    collapse({&curr_board[0][0], &curr_board[0][1], &curr_board[0][2],
+              &curr_board[0][3]});
+    collapse({&curr_board[1][0], &curr_board[1][1], &curr_board[1][2],
+              &curr_board[1][3]});
+    collapse({&curr_board[2][0], &curr_board[2][1], &curr_board[2][2],
+              &curr_board[2][3]});
+    collapse({&curr_board[3][0], &curr_board[3][1], &curr_board[3][2],
+              &curr_board[3][3]});
+}
+
+void board::look_up() {
+    collapse({&curr_board[3][0], &curr_board[2][0], &curr_board[1][0],
+              &curr_board[0][0]});
+    collapse({&curr_board[3][1], &curr_board[2][1], &curr_board[1][1],
+              &curr_board[0][1]});
+    collapse({&curr_board[3][2], &curr_board[2][2], &curr_board[1][2],
+              &curr_board[0][2]});
+    collapse({&curr_board[3][3], &curr_board[2][3], &curr_board[1][3],
+              &curr_board[0][3]});
+}
+
+void board::look_right() {
+    collapse({&curr_board[0][3], &curr_board[0][2], &curr_board[0][1],
+              &curr_board[0][0]});
+    collapse({&curr_board[1][3], &curr_board[1][2], &curr_board[1][1],
+              &curr_board[1][0]});
+    collapse({&curr_board[2][3], &curr_board[2][2], &curr_board[2][1],
+              &curr_board[2][0]});
+    collapse({&curr_board[3][3], &curr_board[3][2], &curr_board[3][1],
+              &curr_board[3][0]});
+}
+
+void board::look_down() {
+    collapse({&curr_board[0][0], &curr_board[1][0], &curr_board[2][0],
+              &curr_board[3][0]});
+    collapse({&curr_board[0][1], &curr_board[1][1], &curr_board[2][1],
+              &curr_board[3][1]});
+    collapse({&curr_board[0][2], &curr_board[1][2], &curr_board[2][2],
+              &curr_board[3][2]});
+    collapse({&curr_board[0][3], &curr_board[1][3], &curr_board[2][3],
+              &curr_board[3][3]});
+}
+
+bool board::add_random_tile() {
+    int tile_val = rng() % 10 == 0 ? 4 : 2;
+    int blank_cnt = 0;
+
+    for (auto i : curr_board) {
+        for (int j : i) {
+            if (j == 0) {
+                blank_cnt++;
+            }
+        }
+    }
+
+    if (blank_cnt == 0) {
+        return false;
+    }
+
+    for (auto& i : curr_board) {
+        for (int& j : i) {
+            blank_cnt--;
+            if (blank_cnt == 0) {
+                j = tile_val;
+                return true;
+            }
+        }
+    }
+}
+
+int board::grid_max(const std::array<std::array<int, 4>, 4>& arr) {
     int gm = 0;
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
@@ -156,10 +227,10 @@ void board::update_state() {
             if (curr_board[i][j] > curr_max) curr_max = curr_board[i][j];
         }
     }
-    // look_left();
-    // look_up();
-    // look_right();
-    // look_down();
+    look_left();
+    look_up();
+    look_right();
+    look_down();
     next_max = std::max(next_max, grid_max(next_left));
     next_max = std::max(next_max, grid_max(next_right));
     next_max = std::max(next_max, grid_max(next_up));
