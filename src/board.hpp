@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <set>
 
 class board {
  public:
@@ -48,6 +49,8 @@ class board {
     std::array<std::array<int, 4>, 4> next_right;
     std::array<std::array<int, 4>, 4> next_down;
 
+    set<pair<int, int>> curr_tile_cnt;
+
     int curr_max;
     int next_max;
     int curr_sum;
@@ -79,5 +82,6 @@ class board {
     // Max tile
     // Sum
     // Set of tiles and their count
+    // Update next tiles
     void update_state();
 };
