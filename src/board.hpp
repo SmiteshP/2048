@@ -2,6 +2,9 @@
 
 #include <array>
 #include <set>
+#include <utility>
+#include "state_queue.hpp"
+#include "state_queue.cpp"
 
 class board {
  public:
@@ -54,7 +57,7 @@ class board {
     int score_increment_right;
     int score_increment_down;
 
-    set<pair<int, int>> curr_tile_cnt;
+    std::set<std::pair<int, int>> curr_tile_cnt;
 
     int curr_max;
     int next_max;
