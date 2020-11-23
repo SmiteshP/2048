@@ -2,22 +2,6 @@
 
 #include <array>
 
-// used to store all current state variables of board
-struct board_state {
-    std::array<std::array<int, 4>, 4> curr_board;
-
-    std::array<std::array<int, 4>, 4> next_left;
-    std::array<std::array<int, 4>, 4> next_up;
-    std::array<std::array<int, 4>, 4> next_right;
-    std::array<std::array<int, 4>, 4> next_down;
-
-    int curr_max;
-    int next_max;
-    int curr_sum;
-
-    int score;
-};
-
 class board {
  public:
     // Constructor and Destructor
@@ -57,17 +41,25 @@ class board {
     bool next_move_possible();
 
  private:
-    // Stores all current state variables
-    board_state curr_state;
+    std::array<std::array<int, 4>, 4> curr_board;
+
+    std::array<std::array<int, 4>, 4> next_left;
+    std::array<std::array<int, 4>, 4> next_up;
+    std::array<std::array<int, 4>, 4> next_right;
+    std::array<std::array<int, 4>, 4> next_down;
+
+    int curr_max;
+    int next_max;
+    int curr_sum;
+
+    int score;
 
     // store game board history
-    state_queue<board_state> grid_queue;
-    // store random numbers to compute/recompute board
-    state_queue<std::pair<int, int>> random_numbers;
+    state_queue<board_state> *grid_queue;
 
     // collapse the list of numbers from left to right
     // returns increment in score
-    int collapse(std::array<int*, 4> arr);
+    int collapse(std::array<int *, 4> arr);
 
     // update value of respective move without adding random tile
     void look_left();
@@ -81,7 +73,7 @@ class board {
     bool add_random_tile();
 
     // Calculate max of the given grid
-    int grid_max(const std::array<std::array<int, 4>, 4>& arr);
+    int grid_max(const std::array<std::array<int, 4>, 4> &arr);
 
     // Calculates the diffent state->Z operations on curr_state
     // Max tile
