@@ -225,7 +225,7 @@ bool board::add_random_tile() {
     int tile_val = rand() % 10 == 0 ? 4 : 2;
     int blank_cnt = 0;
 
-	std::vector<std::pair<int, int>> v;
+    std::vector<std::pair<int, int>> v;
 
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
