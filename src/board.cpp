@@ -2,10 +2,9 @@
 #include <random>
 #include <iostream>
 #include <vector>
+#include <utility>
 
 #include "board.hpp"
-
-using namespace std;
 
 board::board() {
     srand(std::chrono::steady_clock::now().time_since_epoch().count());
@@ -226,12 +225,12 @@ bool board::add_random_tile() {
     int tile_val = rand() % 10 == 0 ? 4 : 2;
     int blank_cnt = 0;
 
-    vector<pair<int, int>> v;
+	std::vector<std::pair<int, int>> v;
 
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (curr_board[i][j] == 0) {
-                v.push_back(make_pair(i, j));
+                v.push_back(std::make_pair(i, j));
                 blank_cnt++;
             }
         }
